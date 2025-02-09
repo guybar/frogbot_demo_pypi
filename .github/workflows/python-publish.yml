@@ -1,0 +1,38 @@
+name: build-python
+
+on:
+  [workflow_dispatch]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-python:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v4
+      
+      - name: Install jfrog cli
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: ${{ vars.ARTIFACTORY_URL }}
+        with:
+            oidc-provider-name: guy-github
+
+      - name: Build Pypi Package
+        run: |
+          jf pip-config --repo-resolve=pypi-dev
+          jf pip install -r requirements.txt --module=jfrog-python-example
+          python setup.py sdist bdist_wheel
+
+      - name: Publish Pypi package
+        run: |
+          jf rt u dist/ pypi-dev/ --module=jfrog-python-example
+
+          jf rt bag my-pip-build 1
+          
+          jf rt bce my-pip-build 1
+          
+          jf rt bp my-pip-build 1
