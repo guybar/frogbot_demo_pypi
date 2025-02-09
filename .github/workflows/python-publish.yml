@@ -21,6 +21,10 @@ jobs:
         with:
             oidc-provider-name: guy-github
             
+      - name: Configure Pypi
+        run: |
+          jf pip-config --repo-resolve=pypi-dev
+            
       - name: Scan Pypi code
         run: |
           jf curation-audit
@@ -28,7 +32,6 @@ jobs:
 
       - name: Build Pypi Package
         run: |
-          jf pip-config --repo-resolve=pypi-dev
           jf pip install -r requirements.txt --module=pyyaml_demo
           python setup.py sdist bdist_wheel
 
