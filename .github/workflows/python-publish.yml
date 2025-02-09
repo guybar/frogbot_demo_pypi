@@ -24,12 +24,12 @@ jobs:
       - name: Build Pypi Package
         run: |
           jf pip-config --repo-resolve=pypi-dev
-          jf pip install -r requirements.txt --module=jfrog-python-example
+          jf pip install -r requirements.txt --module=pyyaml_demo
           python setup.py sdist bdist_wheel
 
       - name: Publish Pypi package
         run: |
-          jf rt u dist/ pypi-dev/ --module=jfrog-python-example
+          jf rt u dist/ pypi-dev/ --module=pyyaml_demo
 
           jf rt bag my-pip-build 1
           
