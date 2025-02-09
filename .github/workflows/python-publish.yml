@@ -32,8 +32,8 @@ jobs:
         run: |
           jf rt u dist/ pypi-dev/ --module=pyyaml_demo
 
-          jf rt bag my-pip-build 1
+          jf rt bag
           
-          jf rt bce my-pip-build 1
+          jf rt bce
           
-          jf rt bp my-pip-build 1
+          jf rt bp
