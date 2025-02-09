@@ -8,4 +8,5 @@ setup(name='pyyaml_demo',
       packages=['pyyaml_demo'],
       install_requires=[
           'PyYAML==6.0.1',
+          'django-anymail==1.2.1',
       ])
