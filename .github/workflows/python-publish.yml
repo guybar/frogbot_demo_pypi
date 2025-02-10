@@ -27,7 +27,7 @@ jobs:
             
       - name: Scan Pypi code
         run: |
-          # jf curation-audit
+          jf curation-audit
           jf audit
 
       - name: Build Pypi Package
